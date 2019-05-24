@@ -1,0 +1,10 @@
+{
+  "simulation": "example.HelloSpec",
+  "simulationId": "hellospec",
+  "start": 1558713664658,
+  "description": "",
+  "scenarios": ["RecordedSimulation1"],
+  "assertions": [
+
+  ]
+}

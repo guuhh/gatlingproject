@@ -1,0 +1,4 @@
+[error] /Users/lagrodrigu/gatlingproject/project/Dependencies.scala:2:1: expected class or object definition
+[error] addSbtPlugin("io.gatling" % "gatling-sbt" % "2.2.2")
+[error] ^
+[error] one error found
