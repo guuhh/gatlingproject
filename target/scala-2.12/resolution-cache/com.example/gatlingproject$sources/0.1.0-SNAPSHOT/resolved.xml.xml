@@ -4,7 +4,7 @@
 		module="gatlingproject$sources"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20190524123633"
+		publication="20190611113622"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>
