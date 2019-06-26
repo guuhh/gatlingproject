@@ -21,3 +21,6 @@ target/streams/gatling/
 target/streams/it/
 target/streams/runtime/
 target/streams/test/
+target/gatling/
+target/streams/$global/testListeners/
+target/test-reports/
