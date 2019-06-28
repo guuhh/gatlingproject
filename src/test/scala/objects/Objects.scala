@@ -10,11 +10,11 @@ import io.gatling.http.Predef._
       .get("/")
       .headers(protocolconfig.getHeaderGet())
       .check(status.is(200))
-      resources http("Main page")
+      .resources(http("Main page")
       .get("/")
       .headers(protocolconfig.getHeaderGet())
       .check(status.is(200))
-      .notSilent)
+      .notSilent))
       .pause(5)
 }
 
@@ -26,11 +26,11 @@ object NewComputer {
     .get("/computers/new")
     .headers(protocolconfig.getHeaderGet())
     .check(status.is(200))
-    resources http("New computer page")
+    .resources(http("New computer page")
     .get("/computers/new")
     .headers(protocolconfig.getHeaderGet())
     .check(status.is(200), substring("Add a computer").find.exists)
-    .notSilent)
+    .notSilent))
     .pause(3)
 }
 
@@ -38,18 +38,24 @@ object RegisterNewComputer {
 
   private val protocolconfig = new ProtocolConf()
 
-  val registernewcomputer = exec(http("Register new computer")
+  val feederComputerName = jsonFile("src/test/scala/feeders/computerNames.json").random
+  import scala.util.Random
+  val feeder = Iterator.continually(Map("randomValue" -> (Random.alphanumeric.take(10).mkString)))
+
+  val registernewcomputer = feed(feederComputerName).feed(feeder)
+    .exec(http("Register new computer")
     .post("/computers")
     .headers(protocolconfig.getHeaderPost())
-    .formParam("name", "Lenovo 2000")
+    .formParam("name", "${computerName} ${randomValue}")
     .formParam("introduced", "2009-01-01")
     .formParam("discontinued", "2019-01-01")
-    .formParam("company", "36")
-    resources http("Register new computer")
+    .formParam("company", "${companyCode}")
+    .check(status.is(200))
+    .resources(http("Register new computer")
     .post("/computers")
     .headers(protocolconfig.getHeaderPost())
-    .check(status.is(200), substring("Done! Computer Lenovo 2000 has been created").find.exists)
-    .notSilent)
+    .check(status.is(303), substring("Done! Computer ${computerName} ${randomValue} has been created").find.exists)
+    .notSilent))
     .pause(3)
 }
 
@@ -62,10 +68,11 @@ object  SearchRegisteredComputer {
     .queryParam("f", "macbook")
     .headers(protocolconfig.getHeaderGet())
     .check(status.is(200))
-    resources http("Search registered computer")
+    .resources(http("Search registered computer")
     .get("/computers")
     .queryParam("f", "macbook")
     .headers(protocolconfig.getHeaderGet())
-    .check(status.is(200), substring("Macbook").count.saveAs("founded")))
+    .check(status.is(200), substring("Macbook").count.saveAs("founded"))
+    .notSilent))
     .pause(3)
 }
