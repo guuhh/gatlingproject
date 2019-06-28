@@ -22,4 +22,10 @@ class SearchAndRegister extends Simulation {
     scnRegister.inject(nothingFor(5), atOnceUsers(10),rampUsersPerSec(10) to 20 during (10 minutes) randomized),
     scnSearcher.inject(atOnceUsers(10), constantUsersPerSec(30) during (600 seconds) )
   ).protocols(protocolconfig.getHttpProtocol())
+
+
+//  setUp(
+//    scnRegister.inject(nothingFor(5), atOnceUsers(100), rampUsersPerSec(100) to 150 during (10 minutes)),
+//    scnSearcher.inject(atOnceUsers(100), rampUsers(1000) over (600 seconds) )
+//  ).protocols(protocolconfig.getHttpProtocol())
 }
