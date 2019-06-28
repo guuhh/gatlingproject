@@ -1,6 +1,7 @@
 package objects
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
+import scala.util.Random
 
   object MainMenu {
 
@@ -38,11 +39,11 @@ object RegisterNewComputer {
 
   private val protocolconfig = new ProtocolConf()
 
-  val feederComputerName = jsonFile("src/test/scala/feeders/computerNames.json").random
-  import scala.util.Random
+  val feedercomputername = jsonFile("src/test/scala/feeders/computerNames.json").random
+
   val feeder = Iterator.continually(Map("randomValue" -> (Random.alphanumeric.take(10).mkString)))
 
-  val registernewcomputer = feed(feederComputerName).feed(feeder)
+  val registernewcomputer = feed(feedercomputername).feed(feeder)
     .exec(http("Register new computer")
     .post("/computers")
     .headers(protocolconfig.getHeaderPost())
@@ -56,7 +57,6 @@ object RegisterNewComputer {
     .headers(protocolconfig.getHeaderPost())
     .check(status.is(303), substring("Done! Computer ${computerName} ${randomValue} has been created").find.exists)
     .notSilent))
-    .pause(3)
 }
 
 object  SearchRegisteredComputer {
