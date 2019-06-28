@@ -25,3 +25,6 @@ target/streams/test/
 target/gatling/
 target/streams/$global/testListeners/
 target/test-reports/
+.DS_Store
+java_pid48983.hprof
+src/test/scala/feeders/
