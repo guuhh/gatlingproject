@@ -9,14 +9,16 @@ import scala.util.Random
 
     private val protocolconfig = new ProtocolConf()
 
-    val mainmenu =
+    val feedIndexComputer = Iterator.continually(Map("indexComputer" -> Random.nextInt(10)))
+
+    val mainmenu = feed(feedIndexComputer)
       exec(
         http("Main Page")
           .get("/")
           .headers(protocolconfig.getHeaderGet())
           .check(status.is(200))
           .check(
-            css("#main > table > tbody > tr:nth-child(1) > td:nth-child(1) > a", "href")
+            css("#main > table > tbody > tr:nth-child(${indexComputer}) > td:nth-child(2) > a", "href")
               .saveAs("computerURL"))
           .notSilent
           .resources(

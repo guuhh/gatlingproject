@@ -19,7 +19,7 @@ class SearchAndRegister extends Simulation {
             )
 
   val scnDelete =
-         scenario("Searcher registered Computer")
+         scenario("Delete first Computer")
             .exec(
                MainMenu.mainmenu,
                AccessFirstComputer.accessfirstcomputer,
@@ -31,8 +31,8 @@ class SearchAndRegister extends Simulation {
            scnRegister
                 .inject(
                     nothingFor(5),
-                    atOnceUsers(10),
-                    rampUsersPerSec(5) to 10 during (5 minutes) randomized
+                    atOnceUsers(20),
+                    rampUsersPerSec(1) to 10 during (5 minutes) randomized
                    ),
            scnDelete
                 .inject(
