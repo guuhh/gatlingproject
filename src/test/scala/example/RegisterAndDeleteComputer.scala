@@ -32,12 +32,12 @@ class SearchAndRegister extends Simulation {
                 .inject(
                     nothingFor(5),
                     atOnceUsers(10),
-                    rampUsersPerSec(10) to 20 during (10 minutes) randomized
+                    rampUsersPerSec(10) to 15 during (5 minutes) randomized
                    ),
            scnDelete
                 .inject(
-                   atOnceUsers(1),
-                   constantUsersPerSec(30) during (600 seconds)
+                   atOnceUsers(10),
+                   constantUsersPerSec(5) during (300 seconds)
                        )
                 )
            .protocols(protocolConfig.getHttpProtocol())
