@@ -32,12 +32,12 @@ class SearchAndRegister extends Simulation {
                 .inject(
                     nothingFor(5),
                     atOnceUsers(10),
-                    rampUsersPerSec(10) to 15 during (5 minutes) randomized
+                    rampUsersPerSec(5) to 10 during (5 minutes) randomized
                    ),
            scnDelete
                 .inject(
                    atOnceUsers(10),
-                   constantUsersPerSec(5) during (300 seconds)
+                   constantUsersPerSec(10) during (300 seconds)
                        )
                 )
            .protocols(protocolConfig.getHttpProtocol())
@@ -52,18 +52,18 @@ class SearchAndRegister extends Simulation {
 //            scnRegister
 //              .inject(
 //                nothingFor(5),
-//                atOnceUsers(100),
-//                rampUsersPerSec(100) to 150 during (10 minutes)
+//                atOnceUsers(30),
+//                rampUsersPerSec(5) to 10 during (10 minutes)
 //                ),
 //            scnDelete
 //              .inject(
-//                atOnceUsers(100),
-//                rampUsers(1000) over (600 seconds))
+//                atOnceUsers(30),
+//                rampUsers(300) over (600 seconds))
 //              )
 //            .protocols(protocolConfig.getHttpProtocol())
 //                  .assertions(
-//                      global.responseTime.max.lt(50),
-//                      global.successfulRequests.percent.gt(95)
+//                      global.responseTime.max.lt(6000),
+//                      global.successfulRequests.percent.gt(90)
 //                    )
 
 }
