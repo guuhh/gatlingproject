@@ -22,8 +22,8 @@ class SearchAndRegister extends Simulation {
          scenario("Delete first Computer")
             .exec(
                MainMenu.mainmenu,
-               AccessFirstComputer.accessfirstcomputer,
-               DeleteFirstComputer.deletefirstcomputer
+              AccessComputerInPage.accesscomputer,
+              DeleteComputerSelectedInPage.deletecomputer
             )
 
 

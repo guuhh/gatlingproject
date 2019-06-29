@@ -9,16 +9,19 @@ import scala.util.Random
 
     private val protocolconfig = new ProtocolConf()
 
-    val feedIndexComputer = Iterator.continually(Map("indexComputer" -> Random.nextInt(10)))
+    val feedIndexComputer = Iterator.continually(
+      Map("indexComputer" -> ("#main > table > tbody > tr:nth-child(" + (Random.nextInt(10) + 1) + ") > td:nth-child(1) > a"))
+      )
 
     val mainmenu = feed(feedIndexComputer)
-      exec(
+      .exec(
         http("Main Page")
           .get("/")
           .headers(protocolconfig.getHeaderGet())
           .check(status.is(200))
           .check(
-            css("#main > table > tbody > tr:nth-child(${indexComputer}) > td:nth-child(2) > a", "href")
+            css("${indexComputer}", "href")
+//              .ofType[String]
               .saveAs("computerURL"))
           .notSilent
           .resources(
@@ -105,11 +108,11 @@ import scala.util.Random
       }
 
 
-     object  AccessFirstComputer {
+     object  AccessComputerInPage {
 
         private val protocolconfig = new ProtocolConf()
 
-                val accessfirstcomputer =
+                val accesscomputer =
                     exec(
                       http("Access the first Computer")
                         .get("${computerURL}")
@@ -119,11 +122,11 @@ import scala.util.Random
                     .pause(3)
 }
 
-     object  DeleteFirstComputer {
+     object  DeleteComputerSelectedInPage {
 
           private val protocolconfig = new ProtocolConf()
 
-                  val deletefirstcomputer =
+                  val deletecomputer =
                       exec(
                         http("Delete the first Computer")
                           .post("${computerURL}/delete")
