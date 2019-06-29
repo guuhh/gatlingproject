@@ -15,7 +15,7 @@ import scala.util.Random
 
     val mainmenu = feed(feedIndexComputer)
       .exec(
-        http("Main Page")
+        http("Access Main Page")
           .get("/")
           .headers(protocolconfig.getHeaderGet())
           .check(status.is(200))
@@ -45,7 +45,7 @@ import scala.util.Random
 
       val newcomputer =
         exec(
-          http("New computer page")
+          http("Access New computer")
             .get("/computers/new")
             .headers(protocolconfig.getHeaderGet())
             .check(status.is(200))
@@ -113,7 +113,7 @@ import scala.util.Random
 
                 val accesscomputer =
                     exec(
-                      http("Access the first Computer")
+                      http("Access Edit Computer")
                         .get("${computerURL}")
                         .headers(protocolconfig.getHeaderGet())
                         .check(status.is(200), substring("Edit computer"))
@@ -127,7 +127,7 @@ import scala.util.Random
 
                   val deletecomputer =
                       exec(
-                        http("Delete the first Computer")
+                        http("Delete Computer")
                           .post("${computerURL}/delete")
                           .headers(protocolconfig.getHeaderPost())
                           .check(status.is(200))
