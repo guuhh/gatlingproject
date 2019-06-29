@@ -21,7 +21,6 @@ import scala.util.Random
           .check(status.is(200))
           .check(
             css("${indexComputer}", "href")
-//              .ofType[String]
               .saveAs("computerURL"))
           .notSilent
           .resources(

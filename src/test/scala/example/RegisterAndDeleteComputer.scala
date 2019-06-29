@@ -4,7 +4,7 @@ import scala.concurrent.duration._
 import io.gatling.core.Predef._
 
 
-class SearchAndRegister extends Simulation {
+class RegisterAndDeleteComputer extends Simulation {
 
   val protocolConfig = new ProtocolConf();
 
