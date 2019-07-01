@@ -31,14 +31,14 @@ class SimulationRegisterAndDeleteComputer extends Simulation {
           setUp(
            scnRegister
                 .inject(
-                    nothingFor(5),
                     atOnceUsers(20),
                     rampUsersPerSec(5) to 10 during (5 minutes) randomized //5min
                    ),
            scnDelete
                 .inject(
-                   atOnceUsers(10),
-                   constantUsersPerSec(5) during (300 seconds) //300 seconds
+                  nothingFor(5),
+                  atOnceUsers(10),
+                  constantUsersPerSec(5) during (300 seconds) //300 seconds
                        )
                 )
            .protocols(protocolConfig.getHttpProtocol())
