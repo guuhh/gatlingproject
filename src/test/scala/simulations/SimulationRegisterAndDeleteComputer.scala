@@ -4,26 +4,27 @@ import scala.concurrent.duration._
 import io.gatling.core.Predef._
 
 
-class RegisterAndDeleteComputer extends Simulation {
+class SimulationRegisterAndDeleteComputer extends Simulation {
 
   val protocolConfig = new ProtocolConf();
 
 
   val scnRegister =
-         scenario("Register new Computer")
+         scenario("Register a new Computer")
             .exec(
                MainMenu.mainmenu,
-               AccessNewComputer.newcomputer,
+               AccessNewComputer.accessnewcomputer,
                RegisterNewComputer.registernewcomputer,
                SearchRegisteredComputer.searchregisteredcomputer
             )
 
   val scnDelete =
-         scenario("Delete first Computer")
+         scenario("Delete a Computer")
             .exec(
-               MainMenu.mainmenu,
-              AccessComputerInPage.accesscomputer,
-              DeleteComputerSelectedInPage.deletecomputer
+              MainMenu.mainmenu,
+              SearchAComputer.searchracomputer,
+              AccessAComputerSearched.accessacomputersearched,
+              DeleteAComputerSearched.deleteacomputersearched
             )
 
 
@@ -32,12 +33,12 @@ class RegisterAndDeleteComputer extends Simulation {
                 .inject(
                     nothingFor(5),
                     atOnceUsers(20),
-                    rampUsersPerSec(1) to 10 during (5 minutes) randomized
+                    rampUsersPerSec(5) to 10 during (5 minutes) randomized //5min
                    ),
            scnDelete
                 .inject(
                    atOnceUsers(10),
-                   constantUsersPerSec(10) during (300 seconds)
+                   constantUsersPerSec(5) during (300 seconds) //300 seconds
                        )
                 )
            .protocols(protocolConfig.getHttpProtocol())
@@ -62,8 +63,9 @@ class RegisterAndDeleteComputer extends Simulation {
 //              )
 //            .protocols(protocolConfig.getHttpProtocol())
 //                  .assertions(
-//                      global.responseTime.max.lt(6000),
-//                      global.successfulRequests.percent.gt(90)
+//                     global.responseTime.max.lt(60000),
+//                      global.successfulRequests.percent.gt(90),
+//                      global.responseTime.mean.between(0,3000,true)
 //                    )
 
 }

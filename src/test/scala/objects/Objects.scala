@@ -1,7 +1,6 @@
 package objects
 import io.gatling.core.Predef._
 import io.gatling.http.Predef.{http, _}
-import objects.MainMenu.protocolconfig
 
 import scala.util.Random
 
@@ -43,7 +42,7 @@ import scala.util.Random
 
       private val protocolconfig = new ProtocolConf()
 
-      val newcomputer =
+      val accessnewcomputer =
         exec(
           http("Access New computer")
             .get("/computers/new")
@@ -71,14 +70,14 @@ import scala.util.Random
 
        val feedercomputername = jsonFile("src/test/scala/feeders/computerNames.json").random
 
-       val feeder = Iterator.continually(Map("randomValue" -> Random.alphanumeric.take(10).mkString))
+       val feederRamdonValue = Iterator.continually(Map("randomValue" -> Random.alphanumeric.take(10).mkString))
 
-       val registernewcomputer = feed(feedercomputername).feed(feeder)
+       val registernewcomputer = feed(feedercomputername).feed(feederRamdonValue)
          .exec(
            http("Register new computer")
               .post("/computers")
               .headers(protocolconfig.getHeaderPost())
-              .formParam("name", "${computerName} ${randomValue}")
+              .formParam("name", "${computerNameBrand} ${computerNameVersion} ${randomValue}")
               .formParam("introduced", "2009-01-01")
               .formParam("discontinued", "2019-01-01")
               .formParam("company", "${companyCode}")
@@ -89,6 +88,7 @@ import scala.util.Random
                   .saveAs("fullComputerName"))
               .notSilent
               )
+         .pause(3)
        }
 
      object  SearchRegisteredComputer {
@@ -106,14 +106,38 @@ import scala.util.Random
          .pause(3)
       }
 
-
-     object  AccessComputerInPage {
+      object  SearchAComputer {
 
         private val protocolconfig = new ProtocolConf()
 
-                val accesscomputer =
+        val feedercomputername = jsonFile("src/test/scala/feeders/computerNames.json").random
+
+        val searchracomputer = feed(feedercomputername).pause(1)
+          .exec(
+            http("Search a computer")
+              .get("/computers")
+              .queryParam("f", "${computerBrand}")
+              .headers(protocolconfig.getHeaderGet())
+              .check(status.is(200))
+              .check(
+                regex("""<a href="/computers/([0-9]*)""")
+                  .count
+                  .saveAs("ComputerListIndexSearched"))
+              .check(
+                css("#main > table > tbody > tr:nth-child(${ComputerListIndexSearched}) > td:nth-child(1) > a","ref")
+                 .saveAs("computerURL"))
+              .notSilent)
+            .pause(3)
+      }
+
+
+     object  AccessAComputerSearched {
+
+        private val protocolconfig = new ProtocolConf()
+
+                val accessacomputersearched =
                     exec(
-                      http("Access Edit Computer")
+                      http("Access a Computer searched")
                         .get("${computerURL}")
                         .headers(protocolconfig.getHeaderGet())
                         .check(status.is(200), substring("Edit computer"))
@@ -121,13 +145,13 @@ import scala.util.Random
                     .pause(3)
 }
 
-     object  DeleteComputerSelectedInPage {
+     object  DeleteAComputerSearched {
 
           private val protocolconfig = new ProtocolConf()
 
-                  val deletecomputer =
+                  val deleteacomputersearched =
                       exec(
-                        http("Delete Computer")
+                        http("Delete a Computer searched")
                           .post("${computerURL}/delete")
                           .headers(protocolconfig.getHeaderPost())
                           .check(status.is(200))
