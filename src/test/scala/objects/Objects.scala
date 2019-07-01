@@ -122,6 +122,8 @@ import scala.util.Random
               .check(
                 regex("""<a href=\"/computers/(\d+)\">""")
                   .count
+                  .transform(count => Random.nextInt(count) + 1)
+                  .gt(0)
                   .saveAs("ComputerIndexList"))
               .check(
                 css("#main > table > tbody > tr:nth-child(${ComputerIndexList}) > td:nth-child(1) > a","href")
