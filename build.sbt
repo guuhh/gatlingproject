@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "gatlingProject",
       libraryDependencies ++= Seq(
-        "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.3.0" % "test",
-        "io.gatling" % "gatling-test-framework" % "2.3.0" % "test"
+        "io.gatling.highcharts" % "gatling-charts-highcharts" % "3.1.2" % "test",
+        "io.gatling" % "gatling-test-framework" % "3.1.2" % "test"
       )
   )
