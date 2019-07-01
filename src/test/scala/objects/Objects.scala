@@ -77,7 +77,7 @@ import scala.util.Random
            http("Register new computer")
               .post("/computers")
               .headers(protocolconfig.getHeaderPost())
-              .formParam("name", "${computerNameBrand} ${computerNameVersion} ${randomValue}")
+              .formParam("name", "${computerBrandName} ${computerModelName} ${randomValue}")
               .formParam("introduced", "2009-01-01")
               .formParam("discontinued", "2019-01-01")
               .formParam("company", "${companyCode}")
@@ -112,19 +112,19 @@ import scala.util.Random
 
         val feedercomputername = jsonFile("src/test/scala/feeders/computerNames.json").random
 
-        val searchracomputer = feed(feedercomputername).pause(1)
+        val searchracomputer = feed(feedercomputername)
           .exec(
             http("Search a computer")
               .get("/computers")
-              .queryParam("f", "${computerBrand}")
+              .queryParam("f", "${computerBrandName}")
               .headers(protocolconfig.getHeaderGet())
               .check(status.is(200))
               .check(
-                regex("""<a href="/computers/([0-9]*)""")
+                regex("""<a href=\"/computers/(\d+)\">""")
                   .count
-                  .saveAs("ComputerListIndexSearched"))
+                  .saveAs("ComputerIndexList"))
               .check(
-                css("#main > table > tbody > tr:nth-child(${ComputerListIndexSearched}) > td:nth-child(1) > a","ref")
+                css("#main > table > tbody > tr:nth-child(${ComputerIndexList}) > td:nth-child(1) > a","href")
                  .saveAs("computerURL"))
               .notSilent)
             .pause(3)

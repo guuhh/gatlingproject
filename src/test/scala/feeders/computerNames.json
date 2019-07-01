@@ -1,17 +1,17 @@
 [
   {
-    "computerNameBrand":"Macbook",
-    "computerNameVersion": "Pro",
+    "computerBrandName":"Macbook",
+    "computerModelName": "Pro",
     "companyCode": "1"
   },
   {
-    "computerNameBrand":"Lenovo",
-    "computerNameVersion": "Ideapad",
+    "computerBrandName":"Lenovo",
+    "computerModelName": "Ideapad",
     "companyCode": "36"
   },
   {
-    "computerNameBrand":"Samsung",
-    "computerNameVersion": "Expert",
+    "computerBrandName":"Samsung",
+    "computerModelName": "Expert",
     "companyCode": "43"
   }
 ]

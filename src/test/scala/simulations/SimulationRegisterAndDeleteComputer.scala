@@ -24,7 +24,7 @@ class SimulationRegisterAndDeleteComputer extends Simulation {
               MainMenu.mainmenu,
               SearchAComputer.searchracomputer,
               AccessAComputerSearched.accessacomputersearched,
-              DeleteAComputerSearched.deleteacomputersearched
+            DeleteAComputerSearched.deleteacomputersearched
             )
 
 
@@ -37,7 +37,7 @@ class SimulationRegisterAndDeleteComputer extends Simulation {
                    ),
            scnDelete
                 .inject(
-                   atOnceUsers(10),
+                   atOnceUsers(1),
                    constantUsersPerSec(5) during (300 seconds) //300 seconds
                        )
                 )
