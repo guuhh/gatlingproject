@@ -39,7 +39,12 @@ class SimulationRegisterAndDeleteComputer extends Simulation {
                   nothingFor(5),
                   atOnceUsers(10),
                   constantUsersPerSec(5) during (300 seconds) //300 seconds
-                       )
+                       ).throttle(
+                               reachRps(100) in (20 seconds),
+                               holdFor(1 minute),
+                               jumpToRps(50),
+                               holdFor( 4 minute)
+                             )
                 )
            .protocols(protocolConfig.getHttpProtocol())
                   .assertions(
