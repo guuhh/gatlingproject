@@ -4,6 +4,15 @@ import io.gatling.http.Predef.{http, _}
 
 import scala.util.Random
 
+
+  object  CleanAllCaches {
+
+    val cleanAll =
+      exec(flushHttpCache)
+      exec(flushSessionCookies)
+      exec(flushCookieJar)
+  }
+
   object MainMenu {
 
     private val protocolconfig = new ProtocolConf()
