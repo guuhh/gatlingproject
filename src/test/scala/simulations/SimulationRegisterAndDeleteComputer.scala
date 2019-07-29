@@ -14,6 +14,7 @@ class SimulationRegisterAndDeleteComputer extends Simulation {
   val scnRegister =
          scenario("Register a new Computer")
             .exec(
+              CleanAllCaches.cleanAll,
                MainMenu.mainmenu,
                AccessNewComputer.accessnewcomputer,
                RegisterNewComputer.registernewcomputer,
@@ -23,6 +24,7 @@ class SimulationRegisterAndDeleteComputer extends Simulation {
   val scnDelete =
          scenario("Delete a Computer")
             .exec(
+              CleanAllCaches.cleanAll,
               MainMenu.mainmenu,
               SearchAComputer.searchracomputer,
               AccessAComputerSearched.accessacomputersearched,
