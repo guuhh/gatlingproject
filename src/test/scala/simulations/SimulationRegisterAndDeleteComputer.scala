@@ -1,7 +1,9 @@
+package complex.example.simulations
+import complex.example.objects._
 
-import objects._
-import scala.concurrent.duration._
 import io.gatling.core.Predef._
+
+import scala.concurrent.duration._
 
 
 class SimulationRegisterAndDeleteComputer extends Simulation {
