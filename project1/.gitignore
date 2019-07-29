@@ -1,0 +1,28 @@
+
+# Created by https://www.gitignore.io/api/sbt,scala,intellij
+# Edit at https://www.gitignore.io/?templates=sbt,scala,intellij
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuf
+.idea/
+.idea/workspace.xml
+project/
+target/streams/$global/clean/
+target/scala-2.12/
+target/streams/$global/$global/
+target/streams/$global/dependencyPositions/
+target/streams/$global/projectDescriptors/
+target/streams/$global/update/
+target/streams/$global/updateClassifiers/
+target/streams/compile/
+target/streams/gatling/
+target/streams/it/
+target/streams/runtime/
+target/streams/test/
+target/gatling/
+target/streams/$global/testListeners/
+target/test-reports/
+.DS_Store
