@@ -26,3 +26,5 @@ target/gatling/
 target/streams/$global/testListeners/
 target/test-reports/
 .DS_Store
+streams/
+target/
