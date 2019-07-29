@@ -1,5 +1,5 @@
-package complex.example.simulations
-import complex.example.objects._
+package simulations
+import objects._
 
 import io.gatling.core.Predef._
 

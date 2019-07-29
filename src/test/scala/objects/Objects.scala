@@ -1,4 +1,4 @@
-package complex.example.objects
+package objects
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef.{http, _}
