@@ -9,7 +9,6 @@
 # User-specific stuf
 .idea/
 .idea/workspace.xml
-project/
 target/streams/$global/clean/
 target/scala-2.12/
 target/streams/$global/$global/
